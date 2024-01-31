@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <center>
+        
+        <table border="3px">
+            <tr>
+                <th>Ename</th>
+                <th>ManagerName</th>
+                <th>Salary</th>
+                <!-- <th>Hiredate</th> -->
+                <!-- <th>Commision</th> -->
+            </tr>
+            {% for emo in empmgrobjects %}
+                <tr>
+                    <td>{{emo.ename}}</td>
+                    <td>{{emo.mgr.ename}}</td>
+                    <td>{{emo.sal}}</td>
+                    <!-- <td>{{emo.hiredate}}</td> -->
+                    <!-- <td>{{emo.comm}}</td> -->
+                </tr>
+            {% endfor %}
+        </table>
+    </center>
+</body>
+</html>
