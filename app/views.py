@@ -90,12 +90,22 @@ def emp_mgr_dept(request):
     emd=Emp.objects.select_related('deptno','mgr').filter(deptno=30,deptno__dlocation='Chicago')
     emd=Emp.objects.select_related('deptno','mgr').order_by('deptno__dlocation') 
 
-
-
-    
-
-
-
     # emd=Emp.objects.select_related('deptno','mgr').all()
     d={'emd':emd}
     return render(request,'emp_mgr_dept.html',d)
+
+
+
+def emp_salgrade(request):
+    eo=Emp.objects.all()
+    so=Salgrade.objects.all()
+    # Retrieving the data of employess who belongs to grade 4
+    so=Salgrade.objects.filter(grade=4)#[grade4 SalgradeObjects]
+    eo=Emp.objects.filter(sal__range=(so[0].losal,so[0].hisal))
+     # Retrieving the data of employess who belongs to grade 3,4
+    so=Salgrade.objects.filter(grade__in=(3,5))
+    eo=Emp.objects.none()
+    for sgo in so:
+        eo=eo|Emp.objects.filter(sal__range=(sgo.losal,sgo.hisal))
+    d={'eo':eo,'so':so}
+    return render(request,'emp_salgrade.html',d)
